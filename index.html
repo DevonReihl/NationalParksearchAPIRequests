@@ -8,18 +8,15 @@
 </head>
 <body>
 
-    <form id=>
-      <label for="states">Choose a State:</label>
-      <select class='states' name="states" id="states">
-        <option value="Pennsylvania">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-        <option value="volvo">Volvo</option>
-      </select>
+    <form>
+      <label for="state">State Letters (Separate states with commas): </label><br>
+      <input type="text" id="state" name="state" placeholder='pa,ny,az'><br>
       <br><br>
+     
       <input type="submit" value="Submit">
     </form>
+    
+    <section class='parks'></section>
     <script
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

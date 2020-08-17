@@ -1,40 +1,49 @@
 'use strict';
 
-const apiKey = "?api_key=pifKwyONHCAUk3tc1aUf9s4GJ4szL5hjkaihBNSm";
-
+const apiKey = "api_key=pifKwyONHCAUk3tc1aUf9s4GJ4szL5hjkaihBNSm";
 
 
 function main() {
   $('form').submit(function (){
     event.preventDefault();
-    let search = $(':selected').val(); 
-    let url = `https://developer.nps.gov/api/v1/parks${apiKey}`;
-       
+    let search = $('#state').val(); 
+    let url = `https://developer.nps.gov/api/v1/parks?${apiKey}&limit=10&stateCode=${search},`;
     fetch(url).then(function (response){
       return response.json();
-    }).then(function (jsonData){
-      console.log(jsonData);
+    }).then(function(jsonData){    
+      render(jsonData);
     });
   });
-}
+} 
+
+/* function createApi(){
+  let url = `https://developer.nps.gov/api/v1/parks${apiKey}`;
+  fetch(url).then(function (response){
+    return response.json();
+  }).then(function(jsonData){
+    createStatesList(jsonData.data);
+  });
+} */
 
 
 function render(jsonData){
   let htmlTemplate = [];
   console.log(jsonData);
-/*  for(let i=0; i < jsonData.length; i++){ //might need to add to jsonData.SOMETHING
-    let list = jsonData[i]; // need json data to add .SOMETHING
-  } */
+  for(let i=0; i < jsonData.data.length; i++){ 
+    let fullName = jsonData.data[i].fullName;
+    let description = jsonData.data[i].description;
+    let parkUrl = jsonData.data[i].url;
+    htmlTemplate.push(`
+    <h2>${fullName}</h2><br>
+    <p>${description}</p>
+    <a href='${parkUrl}'>${parkUrl}</a>
+    `
+    );
+
+  } $('.parks').html(htmlTemplate);
 }
 
-function createNumberList(numberOfDogs){
-  $('.states').append(function(){
-    let list = '';
-    for (let i = 1; i <= numberOfDogs; i++) {
-      list += `<option value='${i}'>${i}</option>`;
-    } return list;
-  });
-}
+
 
 /* 
 
@@ -123,5 +132,6 @@ Description
 Website URL
 The user must be able to make multiple searches and see only the results for the current search.
 As a stretch goal, try adding the park's address to the results.*/
+
 
 $(main);
