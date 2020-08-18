@@ -6,8 +6,9 @@ const apiKey = "api_key=pifKwyONHCAUk3tc1aUf9s4GJ4szL5hjkaihBNSm";
 function main() {
   $('form').submit(function (){
     event.preventDefault();
-    let search = $('#state').val(); 
-    let url = `https://developer.nps.gov/api/v1/parks?${apiKey}&limit=10&stateCode=${search},`;
+    let search = $('#state').val();
+    let limit = $('#limit').val(); 
+    let url = `https://developer.nps.gov/api/v1/parks?${apiKey}&limit=${limit}&stateCode=${search},`;
     fetch(url).then(function (response){
       return response.json();
     }).then(function(jsonData){    
