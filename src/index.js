@@ -1,4 +1,4 @@
-
+import $ from 'jquery';
 const apiKey = "api_key=pifKwyONHCAUk3tc1aUf9s4GJ4szL5hjkaihBNSm";
 
 // The search must trigger a call to NPS's API.
